@@ -34,6 +34,7 @@ res3=mod(IM_belowright - IM_right + pi, 2*pi) - pi;
 res4=mod(IM_right - IM_active + pi, 2*pi) - pi;
 
 temp_residues=res1+res2+res3+res4;              %Sum the phase differences. Positive residues appear as 2*pi, negative as -2*pi.
+<<<<<<< HEAD
 residues=temp_residues;  
 % residues=(temp_residues>=6);                    %Assign 1 to positive residue (which should equal 2*pi)
 % residues=residues - (temp_residues<=-6);        %Assign -1 to negative residues (which should equal -2*pi)
@@ -42,6 +43,15 @@ residues(:,cols)=0; residues(rows,:)=0;         %Zero pad the border residues
 residue_charge=residues;
 
 % residue_sum=sum(sum(abs(residues)));
+=======
+residues=(temp_residues>=6);                    %Assign 1 to positive residue (which should equal 2*pi)
+residues=residues - (temp_residues<=-6);        %Assign -1 to negative residues (which should equal -2*pi)
+residues(:,cols)=0; residues(rows,:)=0;         %Zero pad the border residues
+residues(:,1)=0; residues(1,:)=0; 
+residue_charge=residues;
+
+residue_sum=sum(sum(abs(residues)));
+>>>>>>> 879ce1b42fe1174eb0aa782e7fc751d6009f5947
 
 
 

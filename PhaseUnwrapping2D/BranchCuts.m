@@ -34,7 +34,11 @@ missed_residues=0;                                  %Keep track of the effective
 disp('Calculating branch cuts ...');
 tic;
 temp=size(rowres);
+<<<<<<< HEAD
 for i=1:temp(1)                                  %Loop through the residues
+=======
+for i=1:temp(1);                                    %Loop through the residues
+>>>>>>> 879ce1b42fe1174eb0aa782e7fc751d6009f5947
     radius=1;                                       %Set the initial box size
     r_active=rowres(i);                             %Coordinates of the active residue
     c_active=colres(i);
