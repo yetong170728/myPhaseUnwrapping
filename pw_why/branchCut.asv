@@ -1,0 +1,54 @@
+function [ output_args ] = branchCut( resMap ,MaxBoxRadius )
+%Form branch cuts from residue map
+%   Last modified by Hanyu@cbir ,4/11/2018
+%   Input: resMap 
+%               
+S = size(resMap); 
+% assume 2 dimensional case
+
+% flag the active residue 
+resActMap = zeros(S,'logical');
+
+% if the residue is balanced
+isBal = zeros(S,'logical');
+
+% charge to balance the residue
+charge = zeros(S);
+
+for i = 1:S(1)
+    for j = 1:S(2)
+        if (resMap(i,j) ~= 0) && (~isBal(i,j))
+            resActMap(i,j) = true;
+            charge(i,j) = 1*(resMap(i,j)>0) - 1*(resMap(i,j)<0);
+            for r = 1:MaxBoxRadius
+%                 box = getBox(resMap,[i,j], r);
+                for bx = i-r:i+r
+                    if (bx < 1)
+                        charge(i,j)  = 0;
+                        put a branch from res(i,j) to (1,j)
+                        break;
+                    else
+                        for by = i-r:i+r
+                            if(by < 1)
+                                charge(i,j)  = 0;
+                                
+                                break;
+                            elseif ~resActMap(bx,by)
+                                if ~isBal(bx,by)
+                                    charge(i,j) = charge(i,j) + resMap(bx,by);
+                                end
+                            end
+                        end
+                    end
+                    
+                end
+            end
+                
+        end
+    end
+end
+
+
+
+end
+
